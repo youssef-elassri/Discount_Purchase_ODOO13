@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+     <record id="dis_order_tree" model="ir.ui.view" >
+        <field name="name">purchase.order.tree.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <field name="amount_total" position="before">
+            <field name="discount"/>
+            </field>
+        </field>
+    </record>
+
+
+    <record id="dis_order_form" model="ir.ui.view" >
+        <field name="name">purchase.order.form.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet/group/group[2]/field[@name='date_order']" position="before">
+                <field name="discount"/>
+            </xpath>
+            <xpath expr="//group[@class='oe_subtotal_footer oe_right']/field[@name='amount_untaxed']" position="after">
+                <field name="discount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+            </xpath>
+
+            <xpath expr="//group[@class='oe_subtotal_footer oe_right']/field[@name='amount_tax']" position="before">
+                <field name="amount_after_dis" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
