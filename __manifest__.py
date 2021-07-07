@@ -6,6 +6,7 @@
     'depends': ['purchase'],
     'data': ['views/dis_order_line.xml',
              'views/dis_order_tree.xml',
+             'views/invoice_view.xml',
              'report/report_order_purchase.xml'],
     'demo': [],
     'css': [],

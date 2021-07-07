@@ -21,7 +21,7 @@ class Dis_order_line(models.Model):
             line.update({
                 'price_tax': sum(t.get('amount', 0.0) for t in taxes.get('taxes', [])) * (1 - line.discount / 100 ),
                 'price_total': taxes['total_included'],
-                'price_subtotal': taxes['total_excluded'] * (1 - line.discount / 100 ),
+                'price_subtotal': taxes['total_excluded'],
             })
 
     def _prepare_account_move_line(self, move):
