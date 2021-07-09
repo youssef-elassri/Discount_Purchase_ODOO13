@@ -8,6 +8,7 @@
             <field name="amount_total" position="before">
             <field name="discount"/>
             </field>
+
         </field>
     </record>
 
@@ -20,6 +21,11 @@
             <xpath expr="/form/sheet/group/group[2]/field[@name='date_order']" position="before">
                 <field name="discount"/>
             </xpath>
+
+            <xpath expr="/form/sheet/group/group[2]/field[@name='date_order']" position="before">
+                <field name="type_discount"/>
+            </xpath>
+
             <xpath expr="//group[@class='oe_subtotal_footer oe_right']/field[@name='amount_untaxed']" position="after">
                 <field name="total_discount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
             </xpath>

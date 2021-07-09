@@ -7,6 +7,7 @@
     'data': ['views/dis_order_line.xml',
              'views/dis_order_tree.xml',
              'views/invoice_view.xml',
+             'views/move_line.xml',
              'report/report_order_purchase.xml'],
     'demo': [],
     'css': [],
