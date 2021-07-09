@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+     <record id="dis_move_line" model="ir.ui.view" >
+        <field name="name">account.move.line.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']/tree/field[@name='price_subtotal']" position="replace">
+            <field name="price_subtotal_d"/>
+            </xpath>
+            <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']/tree/field[@name='discount']" position="before">
+            <field name="discount"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="dis_move_from_footer" model="ir.ui.view" >
+        <field name="name">account.move.from.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@class='oe_subtotal_footer']/field[@name='amount_untaxed']" position="before">
+            <field name="total_before_discount"/>
+            </xpath>
+            <xpath expr="//group[@class='oe_subtotal_footer']/field[@name='amount_untaxed']" position="before">
+            <field name="global_discount"/>
+            </xpath>
+        </field>
+    </record>
+
+    oe_subtotal_footer
+</odoo>
