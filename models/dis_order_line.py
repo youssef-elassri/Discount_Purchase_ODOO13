@@ -24,6 +24,10 @@ class Dis_order_line(models.Model):
                 'price_subtotal': taxes['total_excluded'],
             })
 
+    def _cmp_discount(self):
+        for rec in self:
+            rec.discount_global = rec.order_id.discount
+            print('***********************', rec.discount_global)
     def _prepare_account_move_line(self, move):
         self.ensure_one()
         if self.product_id.purchase_method == 'purchase':

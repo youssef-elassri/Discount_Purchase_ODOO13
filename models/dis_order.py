@@ -8,10 +8,10 @@ class Dis_order(models.Model):
     discount = fields.Float("Discount")
     total_discount = fields.Float("Total Discount", compute='_amount_all')
     amount_after_dis = fields.Float("total after discount", compute='_amount_all')
-    type_discount = fields.Selection([
-        ('Fixe', 'Fixe'),
-        ('Percentage', 'Percentage')
-    ])
+    type_discount = fields.Selection(selection=[
+        ('fixed', 'fixed'),
+        ('percentage', 'percentage')
+    ], String = 'Type de remise')
 
     @api.depends('order_line.price_total')
     def _amount_all(self):
@@ -35,4 +35,8 @@ class Dis_order(models.Model):
                 'amount_tax': order.currency_id.round(amount_tax),
                 'amount_total': amount_after_dis + amount_tax,
             })
+
+    def test(self):
+        for ord in self:
+            print(self.discount)
 

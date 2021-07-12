@@ -10,3 +10,4 @@ class AccountMoveLine(models.Model):
     def _cmp_sub(self):
         for line in self:
             line.price_subtotal_d = line.price_unit * line.quantity
+

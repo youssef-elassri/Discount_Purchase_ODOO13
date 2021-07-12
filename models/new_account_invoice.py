@@ -11,13 +11,12 @@ class AccountMove(models.Model):
     @api.model
     def _cmp_totals(self):
         for move in self:
-            total = total_dis = 0
+            total = glob_dis = 0
             for line in move.line_ids:
                 if line.price_unit > 0:
-                    total += line.price_subtotal_d
-                    print(total)
-                    total_dis += (line.discount * 0.01) * line.price_subtotal_d
-            move.global_discount = total_dis # + discount order
+                    total = line.purchase_line_id.order_id.amount_untaxed
+                    glob_dis = line.purchase_line_id.order_id.total_discount
+            move.global_discount = glob_dis
             move.total_before_discount = total
             move.amount_untaxed = move.total_before_discount - move.global_discount
 
