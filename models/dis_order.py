@@ -6,6 +6,7 @@ class Dis_order(models.Model):
     _inherit = "purchase.order"
 
     discount = fields.Float("Discount")
+    discount_valeur = fields.Float("Discount")
     total_discount = fields.Float("Total Discount", compute='_amount_all')
     amount_after_dis = fields.Float("total after discount", compute='_amount_all')
     type_discount = fields.Selection(selection=[
@@ -23,11 +24,8 @@ class Dis_order(models.Model):
                 amount_tax += line.price_tax
                 discount_lines += line.price_subtotal * line.discount * 0.01
 
-            if order.type_discount == 'percentage':
-                order.total_discount = discount_lines + (amount_untaxed - discount_lines) * order.discount * 0.01  # when discount expressed as percentage
-            else:
-                order.total_discount = discount_lines + order.discount
-
+                order.discount_valeur = (amount_untaxed - discount_lines) * order.discount * 0.01 if order.type_discount == 'percentage' else order.discount
+            order.total_discount = discount_lines + order.discount_valeur
             amount_after_dis = amount_untaxed - order.total_discount
             order.update({
                 'amount_untaxed': order.currency_id.round(amount_untaxed),
@@ -35,8 +33,4 @@ class Dis_order(models.Model):
                 'amount_tax': order.currency_id.round(amount_tax),
                 'amount_total': amount_after_dis + amount_tax,
             })
-
-    def test(self):
-        for ord in self:
-            print(self.discount)
 

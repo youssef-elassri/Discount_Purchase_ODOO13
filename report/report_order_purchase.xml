@@ -10,6 +10,22 @@
                     <span t-field="line.discount"/>
                </td>
             </xpath>
+         <xpath expr="//div[@class='row justify-content-end']/div/table/tr[1]" position="after">
+               <tr>
+                   <td name="td_discount_label">Discount</td>
+                   <td class="text-right">
+                       <span t-field="o.total_discount"
+                             t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                   </td>
+               </tr>
+             <tr>
+                   <td name="td_discount_label">Total after discount</td>
+                   <td class="text-right">
+                       <span t-field="o.amount_after_dis"
+                             t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                   </td>
+               </tr>
+            </xpath>
 
      </template>
 </odoo>
